@@ -4,11 +4,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Mvc;
+using WebBanHang.Models.Entity;
 
 namespace WebBanHang.Controllers.API
 {
     public class AuthApitController : ApiController
     {
-
+        
     }
 }

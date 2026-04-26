@@ -17,6 +17,8 @@ namespace WebBanHang
     {
         public void Configuration(IAppBuilder app)
         {
+            System.Diagnostics.Debug.WriteLine(" STARTUP ĐANG CHẠY");
+
             // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=316888
             app.UseCookieAuthentication(new CookieAuthenticationOptions()
             {
@@ -34,32 +36,32 @@ namespace WebBanHang
             var appUserStore = new AppUserStore(appDbContext);
             var userManager = new AppUserManager(appUserStore);
 
-            if (!roleManager.RoleExists("Admin"))
+            if (!roleManager.RoleExists("admin"))
             {
                 var role = new IdentityRole();
                 role.Name = "admin";
                 roleManager.Create(role);
             }
 
-            if (userManager.FindByName("Admin") == null) 
+            if (userManager.FindByName("admin") == null) 
             {
-                var user = new AppUser();
+                var user = new AppUser();   
                 user.UserName = "admin";
                 user.Email = "admin@gmail.com";
                 String userPwd = "admin";
 
-                var chkUSer = userManager.Create(user, userPwd);
+                var chkUser = userManager.Create(user, userPwd);
 
-                if (chkUSer.Succeeded)
+                if (chkUser.Succeeded)
                 {
-                    userManager.AddToRole(user.Id, "Admin");
+                    userManager.AddToRole(user.Id, "admin");
                 }
             }
 
             if (!roleManager.RoleExists("Customer"))
             {
                 var role = new IdentityRole();
-                role.Name = "customer";
+                role.Name = "Customer";
                 roleManager.Create(role);
             }
         }
